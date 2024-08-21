@@ -1,12 +1,18 @@
 import style from "./Item.module.scss";
 import DeleteIcon from "../SVG/Delete/Delete";
 
-const Item = () => {
+interface ItemProps {
+  nickname: string;
+  balanceNear: number;
+  balanceHot: number;
+}
+
+const Item: React.FC<ItemProps> = ({ nickname, balanceNear, balanceHot }) => {
   return (
     <div className={style.item}>
       <div className={`${style.item__wrap} ${style.item__holder}`}>
         <h2 className={style.item__title}>Holder</h2>
-        <span className={style.item__holder__nickname}>vector79.near</span>
+        <span className={style.item__holder__nickname}>{nickname}</span>
         <button className={style['item__holder__btn-delete']}>
           <DeleteIcon />
         </button>
@@ -14,12 +20,12 @@ const Item = () => {
 
       <div className={`${style.item__wrap} ${style.item__balance}`}>
         <h2 className={style.item__title}>Balance Near</h2>
-        <p><span>1.3819</span> NEAR</p>
+        <p><span>{balanceNear.toFixed(4)}</span> NEAR</p>
       </div>
 
       <div className={`${style.item__wrap} ${style.item__balance}`}>
         <h2 className={style.item__title}>Balance HOT</h2>
-        <p><span>29.381912</span> HOT</p>
+        <p><span>{balanceHot.toFixed(6)}</span> HOT</p>
       </div>
     </div>
   )
