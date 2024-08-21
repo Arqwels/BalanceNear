@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -48,3 +49,7 @@ export default tseslint.config({
   },
 })
 ```
+=======
+# BalanceNear
+Простенький проект, который будет показывать баланс крипто-кошелька в сети Near. Выводить будет только токены NEAR и HOT
+>>>>>>> 8a1abc6390e2283d6ccdd9b0e06bc16844489fbe
