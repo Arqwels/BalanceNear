@@ -10,13 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.7",
     "big.js": "^6.2.1",
     "buffer": "^6.0.3",
     "global": "^4.4.0",
-    "near-api-js": "^4.0.3",
-    "process": "^0.11.10",
+    "near-api-js": "^4.0.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-redux": "^9.1.2",
     "sass": "^1.77.8"
   },
   "devDependencies": {

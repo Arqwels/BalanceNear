@@ -1,16 +1,21 @@
 import style from "./Footer.module.scss";
 
-const Footer = () => {
+interface FooterProps {
+  totalNear: number;
+  totalHot: number;
+}
+
+const Footer: React.FC<FooterProps> = ({ totalNear, totalHot }) => {
   return (
     <div className={style.footer}>
       <div className={style.footer__item}>
         <h2>Total NEAR</h2>
-        <p><span>12.3412</span> NEAR</p>
+        <p><span>{totalNear.toFixed(4)}</span> NEAR</p>
       </div>
 
       <div className={style.footer__item}>
         <h2>Total HOT</h2>
-        <p><span>132.431234</span> HOT</p>
+        <p><span>{totalHot.toFixed(6)}</span> HOT</p>
       </div>
     </div>
   )
