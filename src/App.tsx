@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Footer from "./components/Footer/Footer";
 import Item from "./components/Item/Item";
 import Search from "./components/Search/Search";
-import WalletBalances from "./components/WalletBalances";
 import { useGetAddressesQuery } from "./store/api/adressApi";
 import { useGetWalletBalanceQuery } from "./store/api/nearApi";
 import localWallets from './local_wallets.json';
@@ -23,6 +22,7 @@ type Balances = {
 };
 
 const App = () => {
+  const [findingWallets, setFindingWallets] = useState<boolean | undefined>(undefined); // Откуда получены кошельки. Если false - Локально. Если true - С сервера.
   // Используем хук для получения адресов
   const { data: addressesFromServer, isLoading: addressesLoading, error: errorAddress } = useGetAddressesQuery();
   const [addresses, setAddresses] = useState<Address[]>([]);
@@ -32,9 +32,11 @@ const App = () => {
     if (errorAddress) {
       console.error('Ошибка загрузки адресов с сервера:', errorAddress);
       setAddresses(localWallets as Address[]);
+      setFindingWallets(false); // Локальные кошельки
       console.log('Не удалось загрузить данные с сервера, используются локальные данные');
     } else if (addressesFromServer) {
       setAddresses(addressesFromServer);
+      setFindingWallets(true); // Кошельки с сервера
     }
   }, [addressesFromServer, errorAddress]);
   
@@ -66,10 +68,10 @@ const App = () => {
   return (
     <div className="container">
       <header className="header">
-        <Search />
+        <Search findingWallets={findingWallets} />
       </header>
       <main>
-        <WalletBalances />
+        <h1 className="main__title">MyBalanceNear</h1>
         {isLoading ? (
           <div>Загрузка...</div>
         ) : (
@@ -81,6 +83,7 @@ const App = () => {
                 nickname={wallet.accountId as string}
                 balanceNear={parseFloat(balance.near)}
                 balanceHot={parseFloat(balance.hot)}
+                findingWallets={findingWallets}
               />
             );
           })
